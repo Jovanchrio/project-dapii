@@ -77,7 +77,7 @@ export default function Home() {
                 <MapPin className="w-5 h-5 text-muted-foreground mr-3" />
                 <Input 
                   type="text" 
-                  placeholder="Lokasi (e.g. Jakarta Selatan)" 
+                  placeholder="Lokasi (e.g. Cikarang Utara)" 
                   className="border-none shadow-none focus-visible:ring-0 px-0 h-10 text-base"
                 />
               </div>
