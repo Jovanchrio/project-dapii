@@ -38,11 +38,11 @@ export default function Navbar() {
       <div className="container mx-auto px-4 flex items-center justify-between">
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2 group cursor-pointer">
-          <div className="bg-primary text-white font-heading font-bold text-xl px-3 py-1 rounded-lg group-hover:scale-105 transition-transform">
-            LaPed
+          <div className="bg-primary text-white font-heading font-bold text-lg px-3 py-1 rounded-lg group-hover:scale-105 transition-transform">
+            LaPed Zone
           </div>
-          <span className={`font-heading font-bold text-xl ${isScrolled || location !== "/" ? "text-foreground" : "text-white"} transition-colors`}>
-            .id
+          <span className={`font-heading font-bold text-base tracking-wide ${isScrolled || location !== "/" ? "text-foreground" : "text-white"} transition-colors`}>
+            ID
           </span>
         </Link>
 

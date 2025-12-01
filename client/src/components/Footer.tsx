@@ -9,10 +9,10 @@ export default function Footer() {
           {/* Brand */}
           <div className="col-span-1 md:col-span-1">
             <Link href="/" className="flex items-center gap-2 mb-6 cursor-pointer">
-              <div className="bg-primary text-white font-heading font-bold text-xl px-3 py-1 rounded-lg">
-                LaPed
+              <div className="bg-primary text-white font-heading font-bold text-lg px-3 py-1 rounded-lg">
+                LaPed Zone
               </div>
-              <span className="font-heading font-bold text-xl">.id</span>
+              <span className="font-heading font-bold text-base tracking-wide">ID</span>
             </Link>
             <p className="text-slate-400 text-sm leading-relaxed mb-6">
               LapanganPedia adalah ensiklopedia lapangan olahraga #1 di Indonesia. 

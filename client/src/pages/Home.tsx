@@ -46,7 +46,7 @@ export default function Home() {
           >
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/20 border border-primary/30 backdrop-blur-sm mb-6">
               <span className="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
-              <span className="text-primary font-medium text-sm tracking-wide uppercase">Ensiklopedia Lapangan #1</span>
+              <span className="text-primary font-medium text-sm tracking-wide uppercase">LaPed Zone ID - Ensiklopedia Lapangan</span>
             </div>
             
             <h1 className="text-5xl md:text-7xl font-heading font-extrabold text-white leading-[1.1] mb-6">
