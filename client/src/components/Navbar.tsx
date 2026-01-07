@@ -49,56 +49,47 @@ export default function Navbar() {
       }`}
     >
       <div className="container mx-auto px-4 flex items-center justify-between">
-        <Link href="/" className="flex flex-col items-center group cursor-pointer">
-          <div className="relative w-16 h-16">
-            <svg viewBox="0 0 400 400" className="w-full h-full">
+        <Link href="/" className="flex items-center gap-3 group cursor-pointer">
+          <div className="relative w-12 h-12">
+            <svg viewBox="0 0 100 100" className="w-full h-full">
               <defs>
-                <linearGradient id="swirl-yellow" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stopColor="#FFD700" />
-                  <stop offset="100%" stopColor="#FFA500" />
+                <linearGradient id="grad-yellow" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%" style={{ stopColor: '#FFD700', stopOpacity: 1 }} />
+                  <stop offset="100%" style={{ stopColor: '#FFA500', stopOpacity: 1 }} />
                 </linearGradient>
-                <linearGradient id="swirl-orange" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stopColor="#FF4500" />
-                  <stop offset="100%" stopColor="#FF8C00" />
+                <linearGradient id="grad-blue" x1="0%" y1="0%" x2="0%" y2="100%">
+                  <stop offset="0%" style={{ stopColor: '#007BFF', stopOpacity: 1 }} />
+                  <stop offset="100%" style={{ stopColor: '#0056b3', stopOpacity: 1 }} />
                 </linearGradient>
-                <linearGradient id="swirl-blue" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stopColor="#00BFFF" />
-                  <stop offset="100%" stopColor="#1E90FF" />
+                <linearGradient id="grad-purple" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" style={{ stopColor: '#800080', stopOpacity: 1 }} />
+                  <stop offset="100%" style={{ stopColor: '#4B0082', stopOpacity: 1 }} />
                 </linearGradient>
-                <linearGradient id="swirl-purple" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stopColor="#9370DB" />
-                  <stop offset="100%" stopColor="#8A2BE2" />
+                <linearGradient id="grad-orange" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%" style={{ stopColor: '#FF4500', stopOpacity: 1 }} />
+                  <stop offset="100%" style={{ stopColor: '#FF8C00', stopOpacity: 1 }} />
                 </linearGradient>
               </defs>
               
-              {/* Logo Spiral exact matching the image structure */}
-              {/* Yellow/Orange swirl */}
-              <path d="M200,160 C150,160 110,200 110,260 C110,220 140,180 200,180 L200,160 Z" fill="url(#swirl-yellow)" transform="rotate(-40, 200, 200)" />
-              <path d="M200,180 C130,180 80,240 80,300 C150,300 200,240 200,180 Z" fill="url(#swirl-yellow)" />
-              <path d="M120,230 C100,260 110,320 160,340 C130,320 110,280 120,230 Z" fill="url(#swirl-orange)" />
+              <path d="M50,45 C35,45 25,35 25,20 C25,35 35,50 50,50 L50,45 Z" fill="url(#grad-yellow)" transform="rotate(-45 50 50)" />
+              <path d="M50,50 C30,50 15,35 15,15 C40,15 50,30 50,50 Z" fill="url(#grad-yellow)" />
+              
+              <path d="M50,50 C70,50 85,35 85,15 C85,40 70,50 50,50 Z" fill="url(#grad-blue)" transform="rotate(0 50 50)" />
+              <path d="M50,50 C50,30 65,15 85,15 C65,40 50,50 50,50 Z" fill="url(#grad-blue)" />
 
-              {/* Blue swirl */}
-              <path d="M200,160 C250,160 290,200 290,260 C290,220 260,180 200,180 L200,160 Z" fill="url(#swirl-blue)" transform="rotate(40, 200, 200)" />
-              <path d="M200,180 C270,180 320,240 320,300 C250,300 200,240 200,180 Z" fill="url(#swirl-blue)" />
-
-              {/* Purple swirl */}
-              <path d="M200,240 C250,240 290,280 290,340 C240,340 200,280 200,240 Z" fill="url(#swirl-purple)" transform="rotate(180, 200, 200)" />
-              <path d="M200,240 C150,240 110,280 110,340 C160,340 200,280 200,240 Z" fill="url(#swirl-purple)" transform="rotate(180, 200, 200)" />
-
-              {/* Central Dots */}
-              <circle cx="200" cy="120" r="22" fill="#f97316" />
-              <circle cx="200" cy="280" r="22" fill="#7c3aed" />
+              <path d="M50,50 C50,70 65,85 85,85 C60,85 50,70 50,50 Z" fill="url(#grad-purple)" />
+              <path d="M50,50 C35,50 25,65 25,85 C25,70 40,50 50,50 Z" fill="url(#grad-purple)" transform="rotate(-45 50 50)" />
+              
+              <circle cx="50" cy="25" r="5" fill="#FF4500" />
+              <circle cx="50" cy="75" r="5" fill="#4B0082" />
+              
+              <path d="M50,30 C65,30 75,40 75,55 C75,70 60,80 45,80 C30,80 20,65 20,50 C20,35 35,25 50,25" fill="none" stroke="url(#grad-orange)" strokeWidth="4" strokeLinecap="round" opacity="0.8" />
             </svg>
           </div>
-          <div className="flex flex-col items-center">
-            <div className="flex items-center gap-0.5 leading-none mt-1">
-               <span className="font-bold text-3xl tracking-tighter logo-text-blue">LaP</span>
-               <span className="font-bold text-3xl tracking-tighter logo-text-red">e</span>
-               <span className="font-bold text-3xl tracking-tighter logo-text-blue">d</span>
-            </div>
-            <span className="text-[8px] font-bold uppercase tracking-[0.3em] logo-text-blue mt-1.5 opacity-90">
-              TEMUKAN LAPANGAN, WUJUDKAN KEMENANGAN.
-            </span>
+          <div className="flex items-center gap-0.5 leading-none">
+             <span className="font-bold text-2xl tracking-tighter logo-text-blue">LaP</span>
+             <span className="font-bold text-2xl tracking-tighter logo-text-red">e</span>
+             <span className="font-bold text-2xl tracking-tighter logo-text-blue">d</span>
           </div>
         </Link>
 
