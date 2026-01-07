@@ -78,8 +78,7 @@ export default function Navbar() {
         transition={{ duration: 1.5, ease: "easeInOut" }}
         d="M50,45 C35,45 25,35 25,20 C25,35 35,50 50,50 L50,45 Z" 
         fill="url(#grad-yellow)" 
-        originX="50px"
-        originY="50px"
+        style={{ originX: "50px", originY: "50px" }}
       />
       <motion.path 
         initial={{ pathLength: 0, opacity: 0, scale: 0 }}
@@ -117,8 +116,7 @@ export default function Navbar() {
         transition={{ duration: 1.5, ease: "easeInOut", delay: 0.5 }}
         d="M50,50 C35,50 25,65 25,85 C25,70 40,50 50,50 Z" 
         fill="url(#grad-purple)" 
-        originX="50px"
-        originY="50px"
+        style={{ originX: "50px", originY: "50px" }}
       />
       
       <motion.circle 
