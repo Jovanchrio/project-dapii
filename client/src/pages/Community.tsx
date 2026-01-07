@@ -25,7 +25,7 @@ export default function Community() {
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 mb-12">
           <div>
             <h1 className="text-5xl font-black italic uppercase tracking-tighter text-white mb-2">Komunitas</h1>
-            <p className="text-white/70 font-bold">Cari teman main dan bangun tim kamu!</p>
+            <p className="text-secondary font-bold text-xl uppercase italic">Cari teman main dan bangun tim kamu!</p>
           </div>
           
           <Dialog>
@@ -81,15 +81,16 @@ export default function Community() {
 
           <div className="lg:col-span-4">
             <Card className="rounded-3xl border-none shadow-xl bg-white p-6">
-              <h3 className="text-xl font-black italic uppercase tracking-tighter mb-6 text-primary">Rekomendasi Grup</h3>
+              <h3 className="text-xl font-black italic uppercase tracking-tighter mb-6 text-primary">Rekomendasi Grup Baru</h3>
               <div className="space-y-4">
                 {groups.map((group, i) => (
-                  <div key={i} className="flex gap-3 p-2 rounded-xl hover:bg-slate-50 transition-all cursor-pointer group">
+                  <div key={i} className="flex gap-3 p-3 rounded-xl hover:bg-slate-50 transition-all cursor-pointer group border border-transparent hover:border-slate-100">
                     <img src={group.image} className="w-12 h-12 rounded-xl object-cover shadow-sm" />
-                    <div>
+                    <div className="flex-grow">
                       <h4 className="font-bold text-slate-700 group-hover:text-primary text-sm uppercase">{group.name}</h4>
                       <p className="text-[10px] font-bold text-slate-400 uppercase">{group.members} ATLET</p>
                     </div>
+                    <Button variant="ghost" size="sm" className="text-secondary h-8 w-8 p-0 rounded-lg"><Plus className="w-4 h-4" /></Button>
                   </div>
                 ))}
               </div>

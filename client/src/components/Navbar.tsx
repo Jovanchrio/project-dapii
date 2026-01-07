@@ -49,15 +49,18 @@ export default function Navbar() {
       }`}
     >
       <div className="container mx-auto px-4 flex items-center justify-between">
-        <Link href="/" className="flex flex-col items-center group cursor-pointer">
-          <div className="flex items-center gap-1">
-             <span className="font-bold text-2xl tracking-tighter logo-text-blue">LaP</span>
-             <span className="font-bold text-2xl tracking-tighter logo-text-red">e</span>
-             <span className="font-bold text-2xl tracking-tighter logo-text-blue">d</span>
+        <Link href="/" className="flex items-center gap-3 group cursor-pointer">
+          <div className="w-10 h-10 relative">
+             <div className="absolute inset-0 bg-gradient-to-tr from-primary to-secondary rounded-lg rotate-12 group-hover:rotate-0 transition-transform"></div>
+             <div className="absolute inset-0 flex items-center justify-center text-white font-black text-xl italic">L</div>
           </div>
-          <span className="text-[6px] font-bold uppercase tracking-[0.2em] logo-text-blue -mt-1 opacity-80">
-            Zone ID
-          </span>
+          <div className="flex flex-col">
+            <div className="flex items-center gap-0.5">
+               <span className="font-bold text-2xl tracking-tighter logo-text-blue">LaP</span>
+               <span className="font-bold text-2xl tracking-tighter logo-text-red">e</span>
+               <span className="font-bold text-2xl tracking-tighter logo-text-blue">d</span>
+            </div>
+          </div>
         </Link>
 
         <div className="hidden md:flex items-center gap-8">

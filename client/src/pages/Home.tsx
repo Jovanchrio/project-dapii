@@ -9,21 +9,40 @@ import { Search, MapPin, Calendar as CalendarIcon, ChevronRight, Star, TrendingU
 import { motion } from "framer-motion";
 import { useLocation } from "wouter";
 import { Badge } from "@/components/ui/badge";
+import { useToast } from "@/hooks/use-toast";
 import heroImg from "@assets/generated_images/hero_background_of_diverse_people_playing_sports_like_futsal_and_badminton_energetically.png";
 
 export default function Home() {
   const [, setLocation] = useLocation();
   const [searchQuery, setSearchQuery] = useState("");
+  const { toast } = useToast();
+  const [userPoints, setUserPoints] = useState(1250);
 
   const newsItems = [
-    { id: 1, title: "Timnas Futsal Indonesia Juara AFF 2026!", category: "Futsal", date: "Hari ini", image: "https://images.unsplash.com/photo-1574629810360-7efbbe195018?auto=format&fit=crop&q=80&w=400" },
-    { id: 2, title: "Kevin Sanjaya Umumkan Akademi Badminton di Cikarang", category: "Badminton", date: "2 jam yang lalu", image: "https://images.unsplash.com/photo-1626225967045-9c76db7b3ed4?auto=format&fit=crop&q=80&w=400" },
-    { id: 3, title: "Liga Basket Mahasiswa Bekasi Dimulai Pekan Depan", category: "Basket", date: "Kemarin", image: "https://images.unsplash.com/photo-1546519638-68e109498ffc?auto=format&fit=crop&q=80&w=400" },
+    { id: 1, title: "Timnas Indonesia vs Thailand: Duel Klasik di Stadion Patriot Bekasi Besok!", category: "Sepak Bola", date: "Baru Saja", image: "https://images.unsplash.com/photo-1574629810360-7efbbe195018?auto=format&fit=crop&q=80&w=400" },
+    { id: 2, title: "Turnamen Badminton Cikarang Open 2026 Resmi Dibuka, Hadiah Puluhan Juta!", category: "Badminton", date: "2 jam yang lalu", image: "https://images.unsplash.com/photo-1626225967045-9c76db7b3ed4?auto=format&fit=crop&q=80&w=400" },
+    { id: 3, title: "Fasilitas Olahraga di Jababeka Semakin Lengkap dengan Area Lari Baru", category: "Fasilitas", date: "Kemarin", image: "https://images.unsplash.com/photo-1546519638-68e109498ffc?auto=format&fit=crop&q=80&w=400" },
   ];
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
     setLocation("/explore");
+  };
+
+  const handleRedeem = (points: number, reward: string) => {
+    if (userPoints >= points) {
+      setUserPoints(prev => prev - points);
+      toast({
+        title: "Penukaran Berhasil!",
+        description: `Kamu telah menukarkan ${points} poin dengan ${reward}.`,
+      });
+    } else {
+      toast({
+        title: "Poin Tidak Cukup",
+        description: "Yuk mabar lagi buat kumpulin poin!",
+        variant: "destructive"
+      });
+    }
   };
 
   return (
@@ -45,9 +64,8 @@ export default function Home() {
             </div>
             
             <h1 className="text-6xl md:text-8xl font-black text-white leading-[0.9] mb-8 italic tracking-tighter">
-              TEMUKAN <br />
-              <span className="logo-text-red drop-shadow-lg">LAPANGAN,</span> <br />
-              <span className="text-white">WUJUDKAN MENANG.</span>
+              TEMUKAN LAPANGAN, <br />
+              <span className="logo-text-red drop-shadow-lg uppercase">WUJUDKAN KEMENANGAN.</span>
             </h1>
             
             <div className="bg-white p-2 rounded-2xl shadow-2xl max-w-2xl flex flex-col md:flex-row gap-2">
@@ -92,9 +110,18 @@ export default function Home() {
                  <div className="bg-white/5 border border-white/10 p-6 rounded-2xl">
                     <h4 className="font-bold mb-2 flex items-center gap-2"><Gift className="w-5 h-5 text-secondary" /> Cara Penukaran</h4>
                     <ul className="text-sm text-white/60 space-y-2 font-medium">
-                       <li>• 500 Poin: Diskon Rp 25.000</li>
-                       <li>• 1000 Poin: Diskon Rp 60.000</li>
-                       <li>• 2000 Poin: Gratis 1 Jam Main</li>
+                       <li className="flex justify-between items-center cursor-pointer hover:text-white" onClick={() => handleRedeem(500, "Diskon Rp 25.000")}>
+                         <span>• 500 Poin: Diskon Rp 25k</span>
+                         <Badge variant="outline" className="text-[8px] text-secondary border-secondary">TUKAR</Badge>
+                       </li>
+                       <li className="flex justify-between items-center cursor-pointer hover:text-white" onClick={() => handleRedeem(1000, "Diskon Rp 60.000")}>
+                         <span>• 1000 Poin: Diskon Rp 60k</span>
+                         <Badge variant="outline" className="text-[8px] text-secondary border-secondary">TUKAR</Badge>
+                       </li>
+                       <li className="flex justify-between items-center cursor-pointer hover:text-white" onClick={() => handleRedeem(2000, "Gratis 1 Jam Main")}>
+                         <span>• 2000 Poin: Gratis 1 Jam</span>
+                         <Badge variant="outline" className="text-[8px] text-secondary border-secondary">TUKAR</Badge>
+                       </li>
                     </ul>
                  </div>
               </div>
@@ -102,9 +129,9 @@ export default function Home() {
             <div className="flex justify-center">
               <div className="bg-white text-primary p-8 rounded-[3rem] shadow-2xl rotate-3 flex flex-col items-center max-w-sm w-full">
                  <p className="text-xs font-bold uppercase tracking-widest mb-2">Poin Kamu Saat Ini</p>
-                 <p className="text-6xl font-black italic tracking-tighter mb-4">1,250</p>
+                 <p className="text-6xl font-black italic tracking-tighter mb-4">{userPoints.toLocaleString()}</p>
                  <Badge className="bg-secondary mb-8">GOLD MEMBER</Badge>
-                 <Button className="w-full h-12 rounded-xl font-bold bg-primary text-white">Tukar Hadiah Sekarang</Button>
+                 <Button className="w-full h-12 rounded-xl font-bold bg-primary text-white" onClick={() => handleRedeem(500, "Diskon Eksklusif")}>Tukar Hadiah Sekarang</Button>
               </div>
             </div>
           </div>
@@ -116,7 +143,7 @@ export default function Home() {
         <div className="container mx-auto px-4">
           <div className="flex justify-between items-center mb-12">
             <div>
-              <h2 className="text-4xl font-black italic tracking-tighter uppercase mb-2">Berita Olahraga</h2>
+              <h2 className="text-4xl font-black italic tracking-tighter uppercase mb-2">Berita Olahraga Terbaru</h2>
               <p className="text-muted-foreground font-medium">Update terkini dari dunia olahraga lokal & nasional</p>
             </div>
             <Button variant="outline" className="rounded-full font-bold border-2">Semua Berita</Button>
