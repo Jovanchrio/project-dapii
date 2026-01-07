@@ -49,17 +49,25 @@ export default function Navbar() {
       }`}
     >
       <div className="container mx-auto px-4 flex items-center justify-between">
-        <Link href="/" className="flex items-center gap-3 group cursor-pointer">
-          <div className="w-10 h-10 relative">
-             <div className="absolute inset-0 bg-gradient-to-tr from-primary to-secondary rounded-lg rotate-12 group-hover:rotate-0 transition-transform"></div>
-             <div className="absolute inset-0 flex items-center justify-center text-white font-black text-xl italic">L</div>
+        <Link href="/" className="flex flex-col items-center group cursor-pointer">
+          <div className="relative w-12 h-12 mb-1">
+            <svg viewBox="0 0 100 100" className="w-full h-full">
+              <path d="M50 15 A35 35 0 0 1 85 50 A35 35 0 0 1 50 85 A35 35 0 0 1 15 50 A35 35 0 0 1 50 15" fill="none" stroke="currentColor" strokeWidth="2" className="text-slate-100" />
+              <path d="M50 20 C65 20 80 35 80 50 C80 65 65 80 50 80 C35 80 20 65 20 50 C20 35 35 20 50 20" fill="none" stroke="url(#logoGradient)" strokeWidth="8" strokeLinecap="round" className="animate-spin-slow" style={{ animationDuration: '10s' }} />
+              <circle cx="50" cy="50" r="12" fill="url(#logoGradient)" />
+              <defs>
+                <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stopColor="#f59e0b" />
+                  <stop offset="50%" stopColor="#ef4444" />
+                  <stop offset="100%" stopColor="#8b5cf6" />
+                </linearGradient>
+              </defs>
+            </svg>
           </div>
-          <div className="flex flex-col">
-            <div className="flex items-center gap-0.5">
-               <span className="font-bold text-2xl tracking-tighter logo-text-blue">LaP</span>
-               <span className="font-bold text-2xl tracking-tighter logo-text-red">e</span>
-               <span className="font-bold text-2xl tracking-tighter logo-text-blue">d</span>
-            </div>
+          <div className="flex items-center gap-0.5 leading-none">
+             <span className="font-bold text-xl tracking-tighter logo-text-blue">LaP</span>
+             <span className="font-bold text-xl tracking-tighter logo-text-red">e</span>
+             <span className="font-bold text-xl tracking-tighter logo-text-blue">d</span>
           </div>
         </Link>
 
