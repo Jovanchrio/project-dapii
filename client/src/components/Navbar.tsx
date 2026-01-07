@@ -50,18 +50,45 @@ export default function Navbar() {
     >
       <div className="container mx-auto px-4 flex items-center justify-between">
         <Link href="/" className="flex flex-col items-center group cursor-pointer">
-          <div className="relative w-12 h-12 mb-1">
+          <div className="relative w-14 h-14">
             <svg viewBox="0 0 100 100" className="w-full h-full">
-              <path d="M50 15 A35 35 0 0 1 85 50 A35 35 0 0 1 50 85 A35 35 0 0 1 15 50 A35 35 0 0 1 50 15" fill="none" stroke="currentColor" strokeWidth="2" className="text-slate-100" />
-              <path d="M50 20 C65 20 80 35 80 50 C80 65 65 80 50 80 C35 80 20 65 20 50 C20 35 35 20 50 20" fill="none" stroke="url(#logoGradient)" strokeWidth="8" strokeLinecap="round" className="animate-spin-slow" style={{ animationDuration: '10s' }} />
-              <circle cx="50" cy="50" r="12" fill="url(#logoGradient)" />
               <defs>
-                <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stopColor="#f59e0b" />
-                  <stop offset="50%" stopColor="#ef4444" />
-                  <stop offset="100%" stopColor="#8b5cf6" />
+                <linearGradient id="grad-yellow" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%" style={{ stopColor: '#FFD700', stopOpacity: 1 }} />
+                  <stop offset="100%" style={{ stopColor: '#FFA500', stopOpacity: 1 }} />
+                </linearGradient>
+                <linearGradient id="grad-blue" x1="0%" y1="0%" x2="0%" y2="100%">
+                  <stop offset="0%" style={{ stopColor: '#007BFF', stopOpacity: 1 }} />
+                  <stop offset="100%" style={{ stopColor: '#0056b3', stopOpacity: 1 }} />
+                </linearGradient>
+                <linearGradient id="grad-purple" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" style={{ stopColor: '#800080', stopOpacity: 1 }} />
+                  <stop offset="100%" style={{ stopColor: '#4B0082', stopOpacity: 1 }} />
+                </linearGradient>
+                <linearGradient id="grad-orange" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%" style={{ stopColor: '#FF4500', stopOpacity: 1 }} />
+                  <stop offset="100%" style={{ stopColor: '#FF8C00', stopOpacity: 1 }} />
                 </linearGradient>
               </defs>
+              
+              {/* Yellow/Orange swoosh (Top Left) */}
+              <path d="M50,45 C35,45 25,35 25,20 C25,35 35,50 50,50 L50,45 Z" fill="url(#grad-yellow)" transform="rotate(-45 50 50)" />
+              <path d="M50,50 C30,50 15,35 15,15 C40,15 50,30 50,50 Z" fill="url(#grad-yellow)" />
+              
+              {/* Blue swoosh (Top Right) */}
+              <path d="M50,50 C70,50 85,35 85,15 C85,40 70,50 50,50 Z" fill="url(#grad-blue)" transform="rotate(0 50 50)" />
+              <path d="M50,50 C50,30 65,15 85,15 C65,40 50,50 50,50 Z" fill="url(#grad-blue)" />
+
+              {/* Purple/Magenta swoosh (Bottom) */}
+              <path d="M50,50 C50,70 65,85 85,85 C60,85 50,70 50,50 Z" fill="url(#grad-purple)" />
+              <path d="M50,50 C35,50 25,65 25,85 C25,70 40,50 50,50 Z" fill="url(#grad-purple)" transform="rotate(-45 50 50)" />
+              
+              {/* Central element and dots */}
+              <circle cx="50" cy="25" r="5" fill="#FF4500" />
+              <circle cx="50" cy="75" r="5" fill="#4B0082" />
+              
+              {/* Swirl effect */}
+              <path d="M50,30 C65,30 75,40 75,55 C75,70 60,80 45,80 C30,80 20,65 20,50 C20,35 35,25 50,25" fill="none" stroke="url(#grad-orange)" strokeWidth="4" strokeLinecap="round" opacity="0.8" />
             </svg>
           </div>
           <div className="flex items-center gap-0.5 leading-none">
