@@ -50,60 +50,53 @@ export default function Navbar() {
     >
       <div className="container mx-auto px-4 flex items-center justify-between">
         <Link href="/" className="flex flex-col items-center group cursor-pointer">
-          <div className="relative w-20 h-20 mb-1">
+          <div className="relative w-16 h-16">
             <svg viewBox="0 0 400 400" className="w-full h-full">
               <defs>
-                {/* Yellow Swirl Gradient */}
-                <linearGradient id="grad-yellow" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" style={{ stopColor: '#fcd34d', stopOpacity: 1 }} />
-                  <stop offset="100%" style={{ stopColor: '#fbbf24', stopOpacity: 1 }} />
+                <linearGradient id="swirl-yellow" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stopColor="#FFD700" />
+                  <stop offset="100%" stopColor="#FFA500" />
                 </linearGradient>
-                {/* Orange Swirl Gradient */}
-                <linearGradient id="grad-orange" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" style={{ stopColor: '#f97316', stopOpacity: 1 }} />
-                  <stop offset="100%" style={{ stopColor: '#ea580c', stopOpacity: 1 }} />
+                <linearGradient id="swirl-orange" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stopColor="#FF4500" />
+                  <stop offset="100%" stopColor="#FF8C00" />
                 </linearGradient>
-                {/* Blue Swirl Gradient */}
-                <linearGradient id="grad-blue" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" style={{ stopColor: '#0ea5e9', stopOpacity: 1 }} />
-                  <stop offset="100%" style={{ stopColor: '#0284c7', stopOpacity: 1 }} />
+                <linearGradient id="swirl-blue" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stopColor="#00BFFF" />
+                  <stop offset="100%" stopColor="#1E90FF" />
                 </linearGradient>
-                {/* Purple Swirl Gradient */}
-                <linearGradient id="grad-purple" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" style={{ stopColor: '#a855f7', stopOpacity: 1 }} />
-                  <stop offset="100%" style={{ stopColor: '#7c3aed', stopOpacity: 1 }} />
-                </linearGradient>
-                {/* Magenta Swirl Gradient */}
-                <linearGradient id="grad-magenta" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" style={{ stopColor: '#d946ef', stopOpacity: 1 }} />
-                  <stop offset="100%" style={{ stopColor: '#9333ea', stopOpacity: 1 }} />
+                <linearGradient id="swirl-purple" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stopColor="#9370DB" />
+                  <stop offset="100%" stopColor="#8A2BE2" />
                 </linearGradient>
               </defs>
+              
+              {/* Logo Spiral exact matching the image structure */}
+              {/* Yellow/Orange swirl */}
+              <path d="M200,160 C150,160 110,200 110,260 C110,220 140,180 200,180 L200,160 Z" fill="url(#swirl-yellow)" transform="rotate(-40, 200, 200)" />
+              <path d="M200,180 C130,180 80,240 80,300 C150,300 200,240 200,180 Z" fill="url(#swirl-yellow)" />
+              <path d="M120,230 C100,260 110,320 160,340 C130,320 110,280 120,230 Z" fill="url(#swirl-orange)" />
 
-              {/* Yellow Swoosh (Top Left) */}
-              <path d="M140,160 C100,200 120,300 200,300 C200,260 180,220 180,180 C180,140 220,120 260,120 C220,80 140,100 140,160 Z" fill="url(#grad-yellow)" transform="rotate(-15, 200, 200)" />
-              
-              {/* Blue Swoosh (Top Right) */}
-              <path d="M260,140 C300,100 340,180 340,260 C300,260 260,240 220,240 C180,240 160,200 160,160 C160,120 200,100 260,140 Z" fill="url(#grad-blue)" transform="rotate(15, 200, 200)" />
-              
-              {/* Purple Swoosh (Bottom Right) */}
-              <path d="M260,240 C300,280 220,340 140,340 C140,300 160,260 200,260 C240,260 260,220 260,180 C260,140 220,120 260,240 Z" fill="url(#grad-purple)" transform="rotate(45, 200, 200)" />
-              
-              {/* Orange/Red Swoosh (Bottom Left) */}
-              <path d="M140,240 C100,280 60,200 60,120 C100,120 140,140 180,140 C220,140 240,180 240,220 C240,260 200,280 140,240 Z" fill="url(#grad-orange)" transform="rotate(-10, 200, 200)" />
+              {/* Blue swirl */}
+              <path d="M200,160 C250,160 290,200 290,260 C290,220 260,180 200,180 L200,160 Z" fill="url(#swirl-blue)" transform="rotate(40, 200, 200)" />
+              <path d="M200,180 C270,180 320,240 320,300 C250,300 200,240 200,180 Z" fill="url(#swirl-blue)" />
 
-              {/* Dots */}
-              <circle cx="200" cy="110" r="18" fill="#f97316" />
-              <circle cx="200" cy="290" r="18" fill="#7c3aed" />
+              {/* Purple swirl */}
+              <path d="M200,240 C250,240 290,280 290,340 C240,340 200,280 200,240 Z" fill="url(#swirl-purple)" transform="rotate(180, 200, 200)" />
+              <path d="M200,240 C150,240 110,280 110,340 C160,340 200,280 200,240 Z" fill="url(#swirl-purple)" transform="rotate(180, 200, 200)" />
+
+              {/* Central Dots */}
+              <circle cx="200" cy="120" r="22" fill="#f97316" />
+              <circle cx="200" cy="280" r="22" fill="#7c3aed" />
             </svg>
           </div>
           <div className="flex flex-col items-center">
-            <div className="flex items-center gap-0.5 leading-none">
-               <span className="font-bold text-2xl tracking-tighter logo-text-blue">LaP</span>
-               <span className="font-bold text-2xl tracking-tighter logo-text-red">e</span>
-               <span className="font-bold text-2xl tracking-tighter logo-text-blue">d</span>
+            <div className="flex items-center gap-0.5 leading-none mt-1">
+               <span className="font-bold text-3xl tracking-tighter logo-text-blue">LaP</span>
+               <span className="font-bold text-3xl tracking-tighter logo-text-red">e</span>
+               <span className="font-bold text-3xl tracking-tighter logo-text-blue">d</span>
             </div>
-            <span className="text-[7px] font-bold uppercase tracking-[0.3em] logo-text-blue mt-1 opacity-90">
+            <span className="text-[8px] font-bold uppercase tracking-[0.3em] logo-text-blue mt-1.5 opacity-90">
               TEMUKAN LAPANGAN, WUJUDKAN KEMENANGAN.
             </span>
           </div>
