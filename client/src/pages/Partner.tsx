@@ -25,7 +25,7 @@ export default function Partner() {
           <Badge className="bg-secondary text-white border-none mb-6 px-6 py-1 text-[10px] font-black uppercase tracking-widest italic shadow-lg">LaPed Business Solution</Badge>
           <h1 className="text-6xl md:text-8xl font-black italic uppercase tracking-tighter mb-8 leading-[0.85]">
             <span className="text-secondary">DOMINASI PASAR</span> <br />
-            OLAHRAGA LOKAL
+            <span className="text-secondary">OLAHRAGA LOKAL</span>
           </h1>
           <p className="text-lg text-white/70 mb-12 max-w-2xl mx-auto font-medium italic">
             Sistem manajemen venue tercanggih untuk pemilik GOR di Cikarang & Bekasi. 
