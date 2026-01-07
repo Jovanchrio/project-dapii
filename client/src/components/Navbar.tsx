@@ -26,7 +26,7 @@ export default function Navbar() {
     // Splash screen timer
     const timer = setTimeout(() => {
       setShowSplash(false);
-    }, 2500);
+    }, 3000);
 
     return () => {
       window.removeEventListener("scroll", handleScroll);
@@ -51,8 +51,8 @@ export default function Navbar() {
     }
   };
 
-  const LogoIcon = () => (
-    <svg viewBox="0 0 100 100" className="w-full h-full">
+  const LogoIcon = ({ className = "w-full h-full" }: { className?: string }) => (
+    <svg viewBox="0 0 100 100" className={className}>
       <defs>
         <linearGradient id="grad-yellow" x1="0%" y1="0%" x2="100%" y2="0%">
           <stop offset="0%" style={{ stopColor: '#FFD700', stopOpacity: 1 }} />
@@ -73,62 +73,64 @@ export default function Navbar() {
       </defs>
       
       <motion.path 
-        initial={{ pathLength: 0, opacity: 0 }}
-        animate={{ pathLength: 1, opacity: 1 }}
+        initial={{ pathLength: 0, opacity: 0, rotate: -180 }}
+        animate={{ pathLength: 1, opacity: 1, rotate: -45 }}
         transition={{ duration: 1.5, ease: "easeInOut" }}
         d="M50,45 C35,45 25,35 25,20 C25,35 35,50 50,50 L50,45 Z" 
         fill="url(#grad-yellow)" 
-        transform="rotate(-45 50 50)" 
+        originX="50px"
+        originY="50px"
       />
       <motion.path 
-        initial={{ pathLength: 0, opacity: 0 }}
-        animate={{ pathLength: 1, opacity: 1 }}
+        initial={{ pathLength: 0, opacity: 0, scale: 0 }}
+        animate={{ pathLength: 1, opacity: 1, scale: 1 }}
         transition={{ duration: 1.5, ease: "easeInOut", delay: 0.1 }}
         d="M50,50 C30,50 15,35 15,15 C40,15 50,30 50,50 Z" 
         fill="url(#grad-yellow)" 
       />
       
       <motion.path 
-        initial={{ pathLength: 0, opacity: 0 }}
-        animate={{ pathLength: 1, opacity: 1 }}
+        initial={{ pathLength: 0, opacity: 0, x: 20 }}
+        animate={{ pathLength: 1, opacity: 1, x: 0 }}
         transition={{ duration: 1.5, ease: "easeInOut", delay: 0.2 }}
         d="M50,50 C70,50 85,35 85,15 C85,40 70,50 50,50 Z" 
         fill="url(#grad-blue)" 
       />
       <motion.path 
-        initial={{ pathLength: 0, opacity: 0 }}
-        animate={{ pathLength: 1, opacity: 1 }}
+        initial={{ pathLength: 0, opacity: 0, y: -20 }}
+        animate={{ pathLength: 1, opacity: 1, y: 0 }}
         transition={{ duration: 1.5, ease: "easeInOut", delay: 0.3 }}
         d="M50,50 C50,30 65,15 85,15 C65,40 50,50 50,50 Z" 
         fill="url(#grad-blue)" 
       />
 
       <motion.path 
-        initial={{ pathLength: 0, opacity: 0 }}
-        animate={{ pathLength: 1, opacity: 1 }}
+        initial={{ pathLength: 0, opacity: 0, scale: 1.2 }}
+        animate={{ pathLength: 1, opacity: 1, scale: 1 }}
         transition={{ duration: 1.5, ease: "easeInOut", delay: 0.4 }}
         d="M50,50 C50,70 65,85 85,85 C60,85 50,70 50,50 Z" 
         fill="url(#grad-purple)" 
       />
       <motion.path 
-        initial={{ pathLength: 0, opacity: 0 }}
-        animate={{ pathLength: 1, opacity: 1 }}
+        initial={{ pathLength: 0, opacity: 0, rotate: 180 }}
+        animate={{ pathLength: 1, opacity: 1, rotate: -45 }}
         transition={{ duration: 1.5, ease: "easeInOut", delay: 0.5 }}
         d="M50,50 C35,50 25,65 25,85 C25,70 40,50 50,50 Z" 
         fill="url(#grad-purple)" 
-        transform="rotate(-45 50 50)" 
+        originX="50px"
+        originY="50px"
       />
       
       <motion.circle 
-        initial={{ scale: 0 }}
-        animate={{ scale: 1 }}
-        transition={{ duration: 0.5, delay: 1 }}
+        initial={{ scale: 0, y: -50 }}
+        animate={{ scale: 1, y: 0 }}
+        transition={{ type: "spring", stiffness: 200, delay: 1 }}
         cx="50" cy="25" r="5" fill="#FF4500" 
       />
       <motion.circle 
-        initial={{ scale: 0 }}
-        animate={{ scale: 1 }}
-        transition={{ duration: 0.5, delay: 1.1 }}
+        initial={{ scale: 0, y: 50 }}
+        animate={{ scale: 1, y: 0 }}
+        transition={{ type: "spring", stiffness: 200, delay: 1.1 }}
         cx="50" cy="75" r="5" fill="#4B0082" 
       />
       
@@ -148,40 +150,53 @@ export default function Navbar() {
         {showSplash && (
           <motion.div 
             initial={{ opacity: 1 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.8, ease: "easeInOut" }}
+            exit={{ opacity: 0, scale: 1.1, filter: "blur(10px)" }}
+            transition={{ duration: 1, ease: "easeInOut" }}
             className="fixed inset-0 z-[100] bg-primary flex flex-col items-center justify-center overflow-hidden"
           >
-            <motion.div 
-              initial={{ scale: 0.5, rotate: -180 }}
-              animate={{ scale: 1, rotate: 0 }}
-              transition={{ duration: 1.2, ease: "circOut" }}
-              className="w-32 h-32 mb-8"
-            >
-              <LogoIcon />
-            </motion.div>
-            <motion.div 
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.8, duration: 0.8 }}
-              className="text-center"
-            >
-              <h1 className="text-4xl font-black italic tracking-tighter text-white flex gap-1 justify-center">
-                <span className="text-white">LaP</span>
-                <span className="text-secondary">e</span>
-                <span className="text-white">d</span>
-              </h1>
-              <p className="text-white/50 text-[10px] uppercase font-bold tracking-[0.3em] mt-1">Zone ID • Bekasi & Cikarang</p>
-            </motion.div>
+            <div className="flex flex-col items-center">
+              <motion.div 
+                initial={{ scale: 0.5, rotate: -360, opacity: 0 }}
+                animate={{ scale: 1, rotate: 0, opacity: 1 }}
+                transition={{ duration: 1.5, ease: "backOut" }}
+                className="w-40 h-40 mb-6"
+              >
+                <LogoIcon />
+              </motion.div>
+              
+              <motion.div 
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 1.2, duration: 1, ease: "easeOut" }}
+                className="text-center"
+              >
+                <div className="flex items-center justify-center gap-2">
+                   <h1 className="text-5xl font-black italic tracking-tighter text-white flex gap-1">
+                    <span className="text-white">LaP</span>
+                    <span className="text-secondary">e</span>
+                    <span className="text-white">d</span>
+                  </h1>
+                </div>
+                <motion.p 
+                  initial={{ opacity: 0, letterSpacing: "0.1em" }}
+                  animate={{ opacity: 0.5, letterSpacing: "0.3em" }}
+                  transition={{ delay: 1.8, duration: 1.5 }}
+                  className="text-white text-[10px] uppercase font-bold mt-2"
+                >
+                  Zone ID • Bekasi & Cikarang
+                </motion.p>
+              </motion.div>
+            </div>
             
-            {/* Background elements */}
+            {/* Ambient Background Glow */}
             <motion.div 
               animate={{ 
-                scale: [1, 1.2, 1],
-                opacity: [0.1, 0.2, 0.1]
+                scale: [1, 1.3, 1],
+                opacity: [0.1, 0.25, 0.1],
+                rotate: [0, 90, 0]
               }}
-              transition={{ duration: 4, repeat: Infinity }}
-              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-secondary/20 rounded-full blur-[120px] pointer-events-none"
+              transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+              className="absolute w-[800px] h-[800px] bg-secondary/20 rounded-full blur-[150px] pointer-events-none"
             />
           </motion.div>
         )}
@@ -195,15 +210,20 @@ export default function Navbar() {
         }`}
       >
         <div className="container mx-auto px-4 flex items-center justify-between">
-          <Link href="/" className="flex flex-col items-center group cursor-pointer">
-            <div className="flex items-center gap-1">
-               <span className="font-heading font-extrabold text-2xl tracking-tighter logo-text-blue">LaP</span>
-               <span className="font-heading font-extrabold text-2xl tracking-tighter logo-text-red">e</span>
-               <span className="font-heading font-extrabold text-2xl tracking-tighter logo-text-blue">d</span>
+          <Link href="/" className="flex items-center gap-2 group cursor-pointer">
+            <div className="w-10 h-10 shrink-0">
+              <LogoIcon />
             </div>
-            <span className="text-[6px] font-bold uppercase tracking-[0.2em] logo-text-blue -mt-1 opacity-80">
-              Zone ID
-            </span>
+            <div className="flex flex-col items-start leading-none">
+              <div className="flex items-center gap-0.5">
+                 <span className="font-heading font-extrabold text-2xl tracking-tighter logo-text-blue">LaP</span>
+                 <span className="font-heading font-extrabold text-2xl tracking-tighter logo-text-red">e</span>
+                 <span className="font-heading font-extrabold text-2xl tracking-tighter logo-text-blue">d</span>
+              </div>
+              <span className="text-[6px] font-bold uppercase tracking-[0.2em] logo-text-blue -mt-0.5 opacity-80">
+                Zone ID
+              </span>
+            </div>
           </Link>
 
           {/* Desktop Nav */}
