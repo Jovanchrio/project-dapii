@@ -49,50 +49,18 @@ export default function Navbar() {
       }`}
     >
       <div className="container mx-auto px-4 flex items-center justify-between">
-        <Link href="/" className="flex items-center gap-3 group cursor-pointer">
-          <div className="relative w-12 h-12">
-            <svg viewBox="0 0 100 100" className="w-full h-full">
-              <defs>
-                <linearGradient id="grad-yellow" x1="0%" y1="0%" x2="100%" y2="0%">
-                  <stop offset="0%" style={{ stopColor: '#FFD700', stopOpacity: 1 }} />
-                  <stop offset="100%" style={{ stopColor: '#FFA500', stopOpacity: 1 }} />
-                </linearGradient>
-                <linearGradient id="grad-blue" x1="0%" y1="0%" x2="0%" y2="100%">
-                  <stop offset="0%" style={{ stopColor: '#007BFF', stopOpacity: 1 }} />
-                  <stop offset="100%" style={{ stopColor: '#0056b3', stopOpacity: 1 }} />
-                </linearGradient>
-                <linearGradient id="grad-purple" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" style={{ stopColor: '#800080', stopOpacity: 1 }} />
-                  <stop offset="100%" style={{ stopColor: '#4B0082', stopOpacity: 1 }} />
-                </linearGradient>
-                <linearGradient id="grad-orange" x1="0%" y1="0%" x2="100%" y2="0%">
-                  <stop offset="0%" style={{ stopColor: '#FF4500', stopOpacity: 1 }} />
-                  <stop offset="100%" style={{ stopColor: '#FF8C00', stopOpacity: 1 }} />
-                </linearGradient>
-              </defs>
-              
-              <path d="M50,45 C35,45 25,35 25,20 C25,35 35,50 50,50 L50,45 Z" fill="url(#grad-yellow)" transform="rotate(-45 50 50)" />
-              <path d="M50,50 C30,50 15,35 15,15 C40,15 50,30 50,50 Z" fill="url(#grad-yellow)" />
-              
-              <path d="M50,50 C70,50 85,35 85,15 C85,40 70,50 50,50 Z" fill="url(#grad-blue)" transform="rotate(0 50 50)" />
-              <path d="M50,50 C50,30 65,15 85,15 C65,40 50,50 50,50 Z" fill="url(#grad-blue)" />
-
-              <path d="M50,50 C50,70 65,85 85,85 C60,85 50,70 50,50 Z" fill="url(#grad-purple)" />
-              <path d="M50,50 C35,50 25,65 25,85 C25,70 40,50 50,50 Z" fill="url(#grad-purple)" transform="rotate(-45 50 50)" />
-              
-              <circle cx="50" cy="25" r="5" fill="#FF4500" />
-              <circle cx="50" cy="75" r="5" fill="#4B0082" />
-              
-              <path d="M50,30 C65,30 75,40 75,55 C75,70 60,80 45,80 C30,80 20,65 20,50 C20,35 35,25 50,25" fill="none" stroke="url(#grad-orange)" strokeWidth="4" strokeLinecap="round" opacity="0.8" />
-            </svg>
+        <Link href="/" className="flex flex-col items-center group cursor-pointer">
+          <div className="flex items-center gap-1">
+             <span className="font-heading font-extrabold text-2xl tracking-tighter logo-text-blue">LaP</span>
+             <span className="font-heading font-extrabold text-2xl tracking-tighter logo-text-red">e</span>
+             <span className="font-heading font-extrabold text-2xl tracking-tighter logo-text-blue">d</span>
           </div>
-          <div className="flex items-center gap-0.5 leading-none">
-             <span className="font-bold text-2xl tracking-tighter logo-text-blue">LaP</span>
-             <span className="font-bold text-2xl tracking-tighter logo-text-red">e</span>
-             <span className="font-bold text-2xl tracking-tighter logo-text-blue">d</span>
-          </div>
+          <span className="text-[6px] font-bold uppercase tracking-[0.2em] logo-text-blue -mt-1 opacity-80">
+            Zone ID
+          </span>
         </Link>
 
+        {/* Desktop Nav */}
         <div className="hidden md:flex items-center gap-8">
           {navLinks.map((link) => (
             <Link 
@@ -111,6 +79,7 @@ export default function Navbar() {
           ))}
         </div>
 
+        {/* Actions */}
         <div className="hidden md:flex items-center gap-4">
           <Popover>
             <PopoverTrigger asChild>
@@ -188,6 +157,7 @@ export default function Navbar() {
           </Popover>
         </div>
 
+        {/* Mobile Menu */}
         <div className="md:hidden flex items-center gap-2">
           <Sheet>
             <SheetTrigger asChild>

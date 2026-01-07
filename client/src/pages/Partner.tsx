@@ -8,8 +8,6 @@ import { useState } from "react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 
 export default function Partner() {
-  const [selectedFeature, setSelectedFeature] = useState<string | null>(null);
-
   const features = [
     { id: "auto", title: "MANAJEMEN OTOMATIS", desc: "Sistem booking 24 jam tanpa perlu admin manual. No more double booking.", icon: Zap, color: "bg-blue-500/10 text-blue-500", details: "Fitur ini memungkinkan pelanggan melakukan booking langsung dari aplikasi LaPed. Jadwal akan terupdate secara real-time dan pemilik tidak perlu lagi mencatat manual di buku." },
     { id: "analytics", title: "ANALITIK BISNIS", desc: "Pantau jam ramai dan pendapatan harian lewat dashboard interaktif.", icon: BarChart3, color: "bg-green-500/10 text-green-500", details: "Dapatkan laporan harian, mingguan, hingga bulanan mengenai performa GOR Anda. Lihat jam-jam sibuk untuk menyesuaikan strategi harga." },
