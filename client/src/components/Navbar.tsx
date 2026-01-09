@@ -1,37 +1,21 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Link, useLocation } from "wouter";
-import { Menu, X, Search, User, Bell, Settings, LogOut, Info, Ticket } from "lucide-react";
+import { Menu, Bell, MessageCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { MOCK_USER } from "@/lib/mockData";
-import { motion, AnimatePresence } from "framer-motion";
 
 export default function Navbar() {
   const [location, setLocation] = useLocation();
-  const [isScrolled, setIsScrolled] = useState(false);
-  const [showSplash, setShowSplash] = useState(true);
-  const [notifications, setNotifications] = useState([
-    { id: 1, text: "Booking Anda di Jababeka dikonfirmasi!", time: "2m ago", read: false, type: "ticket" },
-    { id: 2, text: "Promo mabar weekend ini!", time: "1h ago", read: false, type: "info" },
-    { id: 3, text: "Poin Anda bertambah 50!", time: "5h ago", read: true, type: "info" },
-  ]);
+  const [scrolled, setScrolled] = useState(false);
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
-    };
-    window.addEventListener("scroll", handleScroll);
-    
-    // Splash screen timer
-    const timer = setTimeout(() => {
-      setShowSplash(false);
-    }, 3000);
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-      clearTimeout(timer);
-    };
+    setMounted(true);
+    const onScroll = () => setScrolled(window.scrollY > 10);
+    window.addEventListener("scroll", onScroll);
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
   const navLinks = [
@@ -41,201 +25,40 @@ export default function Navbar() {
     { name: "Mitra", href: "/partner" },
   ];
 
-  const handleLogout = () => {
-    setLocation("/login");
-  };
-
-  const handleNotificationClick = (notif: any) => {
-    if (notif.type === "ticket") {
-      setLocation("/profile");
-    }
-  };
-
-  const LogoIcon = ({ className = "w-full h-full" }: { className?: string }) => (
-    <svg viewBox="0 0 100 100" className={className}>
-      <defs>
-        <linearGradient id="grad-yellow" x1="0%" y1="0%" x2="100%" y2="0%">
-          <stop offset="0%" style={{ stopColor: '#FFD700', stopOpacity: 1 }} />
-          <stop offset="100%" style={{ stopColor: '#FFA500', stopOpacity: 1 }} />
-        </linearGradient>
-        <linearGradient id="grad-blue" x1="0%" y1="0%" x2="0%" y2="100%">
-          <stop offset="0%" style={{ stopColor: '#007BFF', stopOpacity: 1 }} />
-          <stop offset="100%" style={{ stopColor: '#0056b3', stopOpacity: 1 }} />
-        </linearGradient>
-        <linearGradient id="grad-purple" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" style={{ stopColor: '#800080', stopOpacity: 1 }} />
-          <stop offset="100%" style={{ stopColor: '#4B0082', stopOpacity: 1 }} />
-        </linearGradient>
-        <linearGradient id="grad-orange" x1="0%" y1="0%" x2="100%" y2="0%">
-          <stop offset="0%" style={{ stopColor: '#FF4500', stopOpacity: 1 }} />
-          <stop offset="100%" style={{ stopColor: '#FF8C00', stopOpacity: 1 }} />
-        </linearGradient>
-      </defs>
-      
-      <motion.path 
-        initial={{ pathLength: 0, opacity: 0, rotate: -180 }}
-        animate={{ pathLength: 1, opacity: 1, rotate: -45 }}
-        transition={{ duration: 1.5, ease: "easeInOut" }}
-        d="M50,45 C35,45 25,35 25,20 C25,35 35,50 50,50 L50,45 Z" 
-        fill="url(#grad-yellow)" 
-        style={{ originX: "50px", originY: "50px" }}
-      />
-      <motion.path 
-        initial={{ pathLength: 0, opacity: 0, scale: 0 }}
-        animate={{ pathLength: 1, opacity: 1, scale: 1 }}
-        transition={{ duration: 1.5, ease: "easeInOut", delay: 0.1 }}
-        d="M50,50 C30,50 15,35 15,15 C40,15 50,30 50,50 Z" 
-        fill="url(#grad-yellow)" 
-      />
-      
-      <motion.path 
-        initial={{ pathLength: 0, opacity: 0, x: 20 }}
-        animate={{ pathLength: 1, opacity: 1, x: 0 }}
-        transition={{ duration: 1.5, ease: "easeInOut", delay: 0.2 }}
-        d="M50,50 C70,50 85,35 85,15 C85,40 70,50 50,50 Z" 
-        fill="url(#grad-blue)" 
-      />
-      <motion.path 
-        initial={{ pathLength: 0, opacity: 0, y: -20 }}
-        animate={{ pathLength: 1, opacity: 1, y: 0 }}
-        transition={{ duration: 1.5, ease: "easeInOut", delay: 0.3 }}
-        d="M50,50 C50,30 65,15 85,15 C65,40 50,50 50,50 Z" 
-        fill="url(#grad-blue)" 
-      />
-
-      <motion.path 
-        initial={{ pathLength: 0, opacity: 0, scale: 1.2 }}
-        animate={{ pathLength: 1, opacity: 1, scale: 1 }}
-        transition={{ duration: 1.5, ease: "easeInOut", delay: 0.4 }}
-        d="M50,50 C50,70 65,85 85,85 C60,85 50,70 50,50 Z" 
-        fill="url(#grad-purple)" 
-      />
-      <motion.path 
-        initial={{ pathLength: 0, opacity: 0, rotate: 180 }}
-        animate={{ pathLength: 1, opacity: 1, rotate: -45 }}
-        transition={{ duration: 1.5, ease: "easeInOut", delay: 0.5 }}
-        d="M50,50 C35,50 25,65 25,85 C25,70 40,50 50,50 Z" 
-        fill="url(#grad-purple)" 
-        style={{ originX: "50px", originY: "50px" }}
-      />
-      
-      <motion.circle 
-        initial={{ scale: 0, y: -50 }}
-        animate={{ scale: 1, y: 0 }}
-        transition={{ type: "spring", stiffness: 200, delay: 1 }}
-        cx="50" cy="25" r="5" fill="#FF4500" 
-      />
-      <motion.circle 
-        initial={{ scale: 0, y: 50 }}
-        animate={{ scale: 1, y: 0 }}
-        transition={{ type: "spring", stiffness: 200, delay: 1.1 }}
-        cx="50" cy="75" r="5" fill="#4B0082" 
-      />
-      
-      <motion.path 
-        initial={{ pathLength: 0, opacity: 0 }}
-        animate={{ pathLength: 1, opacity: 0.8 }}
-        transition={{ duration: 2, ease: "easeInOut", delay: 0.6 }}
-        d="M50,30 C65,30 75,40 75,55 C75,70 60,80 45,80 C30,80 20,65 20,50 C20,35 35,25 50,25" 
-        fill="none" stroke="url(#grad-orange)" strokeWidth="4" strokeLinecap="round" 
-      />
-    </svg>
-  );
-
   return (
     <>
-      <AnimatePresence>
-        {showSplash && (
-          <motion.div 
-            initial={{ opacity: 1 }}
-            exit={{ opacity: 0, scale: 1.1, filter: "blur(10px)" }}
-            transition={{ duration: 1, ease: "easeInOut" }}
-            className="fixed inset-0 z-[100] bg-primary flex flex-col items-center justify-center overflow-hidden"
-          >
-            <div className="flex flex-col items-center">
-              <motion.div 
-                initial={{ scale: 0.5, rotate: -360, opacity: 0 }}
-                animate={{ scale: 1, rotate: 0, opacity: 1 }}
-                transition={{ duration: 1.5, ease: "backOut" }}
-                className="w-40 h-40 mb-6"
-              >
-                <LogoIcon />
-              </motion.div>
-              
-              <motion.div 
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 1.2, duration: 1, ease: "easeOut" }}
-                className="text-center"
-              >
-                <div className="flex items-center justify-center gap-2">
-                   <h1 className="text-5xl font-black italic tracking-tighter text-white flex gap-1">
-                    <span className="text-white">LaP</span>
-                    <span className="text-secondary">e</span>
-                    <span className="text-white">d</span>
-                  </h1>
-                </div>
-                <motion.p 
-                  initial={{ opacity: 0, letterSpacing: "0.1em" }}
-                  animate={{ opacity: 0.5, letterSpacing: "0.3em" }}
-                  transition={{ delay: 1.8, duration: 1.5 }}
-                  className="text-white text-[10px] uppercase font-bold mt-2"
-                >
-                  Zone ID • Bekasi & Cikarang
-                </motion.p>
-              </motion.div>
-            </div>
-            
-            {/* Ambient Background Glow */}
-            <motion.div 
-              animate={{ 
-                scale: [1, 1.3, 1],
-                opacity: [0.1, 0.25, 0.1],
-                rotate: [0, 90, 0]
-              }}
-              transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-              className="absolute w-[800px] h-[800px] bg-secondary/20 rounded-full blur-[150px] pointer-events-none"
-            />
-          </motion.div>
-        )}
-      </AnimatePresence>
-
+      {/* NAVBAR */}
       <nav
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-          isScrolled || location !== "/"
-            ? "bg-white/95 dark:bg-slate-900/95 backdrop-blur-md shadow-sm py-2"
-            : "bg-transparent py-4"
-        }`}
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300
+        ${scrolled ? "bg-white shadow-md" : "bg-transparent"}
+        ${mounted ? "animate-navbar" : "opacity-0"}`}
       >
-        <div className="container mx-auto px-4 flex items-center justify-between">
-          <Link href="/" className="flex items-center gap-2 group cursor-pointer">
-            <div className="w-10 h-10 shrink-0">
-              <LogoIcon />
-            </div>
-            <div className="flex flex-col items-start leading-none">
-              <div className="flex items-center gap-0.5">
-                 <span className="font-heading font-extrabold text-2xl tracking-tighter logo-text-blue">LaP</span>
-                 <span className="font-heading font-extrabold text-2xl tracking-tighter logo-text-red">e</span>
-                 <span className="font-heading font-extrabold text-2xl tracking-tighter logo-text-blue">d</span>
-              </div>
-              <span className="text-[6px] font-bold uppercase tracking-[0.2em] logo-text-blue -mt-0.5 opacity-80">
-                Zone ID
-              </span>
-            </div>
+        <div className="container mx-auto px-6 h-16 flex items-center justify-between">
+          {/* LOGO */}
+          <Link href="/" className="flex items-center gap-2">
+            <img
+              src="/logo-laped.png"
+              alt="LaPed"
+              className="w-11 h-11 animate-spin-slow"
+            />
+            <span className="text-xl font-extrabold text-slate-900">
+              LaPed
+            </span>
           </Link>
 
-          {/* Desktop Nav */}
+          {/* DESKTOP MENU */}
           <div className="hidden md:flex items-center gap-8">
             {navLinks.map((link) => (
-              <Link 
-                key={link.name} 
+              <Link
+                key={link.name}
                 href={link.href}
-                className={`text-sm font-bold tracking-tight hover:text-secondary transition-colors cursor-pointer ${
+                className={`font-semibold transition-colors
+                ${
                   location === link.href
-                    ? "text-secondary underline underline-offset-4"
-                    : isScrolled || location !== "/"
-                    ? "text-primary"
-                    : "text-white hover:text-white"
+                    ? "text-blue-600"
+                    : scrolled
+                    ? "text-slate-700 hover:text-blue-600"
+                    : "text-slate-900 hover:text-blue-600"
                 }`}
               >
                 {link.name}
@@ -243,127 +66,77 @@ export default function Navbar() {
             ))}
           </div>
 
-          {/* Actions */}
+          {/* RIGHT */}
           <div className="hidden md:flex items-center gap-4">
+            {/* NOTIFICATION */}
             <Popover>
               <PopoverTrigger asChild>
-                <Button variant="ghost" size="icon" className={`relative ${isScrolled || location !== "/" ? "text-primary" : "text-white hover:bg-white/20"}`}>
-                  <Bell className="w-5 h-5" />
-                  {notifications.some(n => !n.read) && (
-                    <span className="absolute top-2 right-2 w-2 h-2 bg-secondary rounded-full border-2 border-white"></span>
-                  )}
+                <Button variant="ghost" size="icon">
+                  <Bell />
                 </Button>
               </PopoverTrigger>
-              <PopoverContent className="w-80 p-0 shadow-2xl border-slate-100" align="end">
-                <div className="p-4 border-b flex justify-between items-center bg-slate-50">
-                  <h4 className="font-bold">Notifikasi</h4>
-                  <Button variant="ghost" size="sm" className="text-xs h-7" onClick={() => setNotifications(n => n.map(x => ({...x, read: true})))}>
-                    Tandai dibaca
-                  </Button>
-                </div>
-                <div className="max-h-[300px] overflow-y-auto">
-                  {notifications.map(n => (
-                    <div 
-                      key={n.id} 
-                      className={`p-4 border-b last:border-0 hover:bg-slate-50 cursor-pointer flex gap-3 transition-colors ${!n.read ? "bg-slate-50/50" : ""}`}
-                      onClick={() => handleNotificationClick(n)}
-                    >
-                      <div className={`w-8 h-8 rounded-full flex items-center justify-center shrink-0 ${n.type === 'ticket' ? 'bg-primary/10 text-primary' : 'bg-secondary/10 text-secondary'}`}>
-                        {n.type === 'ticket' ? <Ticket className="w-4 h-4" /> : <Info className="w-4 h-4" />}
-                      </div>
-                      <div>
-                        <p className="text-sm font-medium">{n.text}</p>
-                        <p className="text-xs text-muted-foreground mt-1">{n.time}</p>
-                      </div>
-                    </div>
-                  ))}
-                </div>
+              <PopoverContent className="w-64">
+                <p className="font-bold mb-2">Notifikasi</p>
+                <p className="text-sm text-muted-foreground">
+                  Tidak ada notifikasi baru
+                </p>
               </PopoverContent>
             </Popover>
 
-            <div className="h-6 w-px bg-slate-200 mx-1"></div>
-
+            {/* PROFILE */}
             <Popover>
               <PopoverTrigger asChild>
-                <div className="flex items-center gap-2 cursor-pointer group">
-                  <div className="w-9 h-9 rounded-full bg-slate-100 border-2 border-primary/20 overflow-hidden group-hover:border-secondary transition-all">
-                    <img 
-                      src={`https://api.dicebear.com/7.x/avataaars/svg?seed=${MOCK_USER.name}`} 
-                      alt="User" 
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
-                </div>
+                <img
+                  src={`https://api.dicebear.com/7.x/avataaars/svg?seed=${MOCK_USER.name}`}
+                  className="w-9 h-9 rounded-full cursor-pointer border"
+                />
               </PopoverTrigger>
-              <PopoverContent className="w-56 p-2" align="end">
-                <div className="p-3 border-b mb-2 bg-slate-50 rounded-lg">
-                  <p className="font-bold text-sm">{MOCK_USER.name}</p>
-                  <p className="text-xs text-muted-foreground">{MOCK_USER.points} Poin Lapangan</p>
-                </div>
-                <Link href="/profile">
-                  <Button variant="ghost" className="w-full justify-start gap-2 h-9 text-sm">
-                    <User className="w-4 h-4" /> Profil Saya
-                  </Button>
-                </Link>
-                <Link href="/profile">
-                  <Button variant="ghost" className="w-full justify-start gap-3 h-9 text-sm">
-                    <Ticket className="w-4 h-4" /> Tiket Saya
-                  </Button>
-                </Link>
-                <Button variant="ghost" className="w-full justify-start gap-2 h-9 text-sm">
-                  <Settings className="w-4 h-4" /> Pengaturan
-                </Button>
-                <div className="h-px bg-slate-100 my-1"></div>
-                <Button variant="ghost" className="w-full justify-start gap-2 h-9 text-sm text-red-500 hover:text-red-600 hover:bg-red-50" onClick={handleLogout}>
-                  <LogOut className="w-4 h-4" /> Keluar
+              <PopoverContent className="w-44">
+                <p className="font-bold text-sm">{MOCK_USER.name}</p>
+                <Button
+                  variant="ghost"
+                  className="w-full justify-start text-red-500 mt-2"
+                  onClick={() => setLocation("/login")}
+                >
+                  Keluar
                 </Button>
               </PopoverContent>
             </Popover>
           </div>
 
-          {/* Mobile Menu */}
-          <div className="md:hidden flex items-center gap-2">
+          {/* MOBILE */}
+          <div className="md:hidden">
             <Sheet>
               <SheetTrigger asChild>
-                <Button variant="ghost" size="icon" className={isScrolled || location !== "/" ? "text-primary" : "text-white"}>
-                  <Menu className="w-6 h-6" />
+                <Button variant="ghost" size="icon">
+                  <Menu />
                 </Button>
               </SheetTrigger>
-              <SheetContent side="right" className="w-full max-w-xs p-0">
-                <div className="p-6 bg-primary text-white">
-                  <div className="flex items-center gap-4 mb-6">
-                     <img 
-                      src={`https://api.dicebear.com/7.x/avataaars/svg?seed=${MOCK_USER.name}`} 
-                      alt="User" 
-                      className="w-12 h-12 rounded-full border-2 border-white"
-                    />
-                    <div>
-                      <p className="font-bold">{MOCK_USER.name}</p>
-                      <p className="text-xs text-white/70">{MOCK_USER.points} Poin</p>
-                    </div>
-                  </div>
-                </div>
-                <div className="flex flex-col gap-2 p-6">
-                  {navLinks.map((link) => (
-                    <Link 
-                      key={link.name} 
-                      href={link.href}
-                      className="text-lg font-bold text-slate-700 p-2 hover:bg-slate-50 rounded-lg transition-colors cursor-pointer"
-                    >
-                      {link.name}
-                    </Link>
-                  ))}
-                  <div className="h-px bg-slate-100 my-4"></div>
-                  <Link href="/profile"><Button variant="ghost" className="w-full justify-start gap-3 h-12 text-slate-700"><User className="w-5 h-5" /> Profil Saya</Button></Link>
-                  <Link href="/profile"><Button variant="ghost" className="w-full justify-start gap-3 h-12 text-slate-700"><Ticket className="w-5 h-5" /> Tiket Saya</Button></Link>
-                  <Button variant="ghost" className="w-full justify-start gap-3 h-12 text-slate-700"><Settings className="w-5 h-5" /> Pengaturan</Button>
-                  <Button variant="ghost" className="w-full justify-start gap-3 h-12 text-red-500 hover:bg-red-50 mt-4" onClick={handleLogout}><LogOut className="w-5 h-5" /> Keluar</Button>
-                </div>
+              <SheetContent side="right">
+                {navLinks.map((link) => (
+                  <Link
+                    key={link.name}
+                    href={link.href}
+                    className="block py-3 font-semibold"
+                  >
+                    {link.name}
+                  </Link>
+                ))}
               </SheetContent>
             </Sheet>
           </div>
         </div>
       </nav>
+
+      {/* FLOATING CS */}
+      <a
+        href="https://t.me/LaPedCS_bot"
+        target="_blank"
+        className="fixed bottom-6 right-6 z-50 bg-blue-600 text-white
+        p-4 rounded-full shadow-lg hover:scale-110 transition"
+      >
+        <MessageCircle className="w-6 h-6" />
+      </a>
     </>
   );
 }
